@@ -1,4 +1,4 @@
-# 🛒 TP — Smart Inventory & Order Platform
+# TP — Smart Inventory & Order Platform
 
 > Full-Stack **Angular 18+** & **Spring Boot 3.x** — Project-Driven Learning
 
@@ -14,7 +14,7 @@
 
 ---
 
-## 📖 About This TP
+## About This TP
 
 This repository is a **hands-on practical work (TP)** designed to take a student from *"I know the syntax"* to *"I can build and reason about a real full-stack application."*
 
@@ -27,9 +27,9 @@ You build **one real product** — a **Smart Inventory & Order Platform** — an
 
 ---
 
-## 🎯 What You Will Learn
+## What You Will Learn
 
-### 🔧 Spring Boot 3.x (Backend)
+### Spring Boot 3.x (Backend)
 
 | Concept | Description |
 |---|---|
@@ -42,7 +42,7 @@ You build **one real product** — a **Smart Inventory & Order Platform** — an
 | **Spring Security + JWT** | Stateless authentication, `JwtAuthenticationFilter`, role-based access |
 | **Performance** | N+1 problem diagnosis, `@EntityGraph`, DTO Projections |
 
-### 🅰️ Angular 18+ (Frontend)
+### Angular 18+ (Frontend)
 
 | Concept | Description |
 |---|---|
@@ -56,7 +56,7 @@ You build **one real product** — a **Smart Inventory & Order Platform** — an
 | **Route Guards** | `CanActivateFn` for protecting routes |
 | **Lazy Loading** | `@defer (on viewport)` for performance optimization |
 
-### 🏗️ Architecture & DevOps
+### Architecture & DevOps
 
 | Concept | Description |
 |---|---|
@@ -67,7 +67,7 @@ You build **one real product** — a **Smart Inventory & Order Platform** — an
 
 ---
 
-## 🧱 Tech Stack
+## Tech Stack
 
 | Layer | Technology |
 |---|---|
@@ -79,7 +79,7 @@ You build **one real product** — a **Smart Inventory & Order Platform** — an
 
 ---
 
-## 🛒 Project Overview
+## Project Overview
 
 You are building a **professional inventory management system** with three main modules:
 
@@ -98,7 +98,7 @@ You are building a **professional inventory management system** with three main 
 
 ---
 
-## 🗂️ Architecture
+## Architecture
 
 This project uses **Layered Architecture** (N-Tier), organized with a **"Package by Layer"** structure.
 
@@ -155,7 +155,7 @@ smart-inventory-ui/
 
 ---
 
-## 🧩 The 5-Phase Learning Path
+## The 5-Phase Learning Path
 
 ### Phase 1 — Data Contract & Basic Rendering *(4 days, 2h/day)*
 
@@ -226,7 +226,7 @@ smart-inventory-ui/
 
 ---
 
-## 📑 Repository Contents
+## Repository Contents
 
 | File | Description |
 |---|---|
@@ -235,7 +235,7 @@ smart-inventory-ui/
 
 ---
 
-## 🛠️ Prerequisites
+## Prerequisites
 
 Before starting this TP, ensure you have:
 
@@ -250,7 +250,7 @@ Before starting this TP, ensure you have:
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Run Backend
 
@@ -277,7 +277,7 @@ App will be available at `http://localhost` (Nginx → Angular + API proxy).
 
 ---
 
-## 📅 Suggested Weekly Schedule (2h/day)
+## Suggested Weekly Schedule (2h/day)
 
 | Days | Focus |
 |---|---|
@@ -287,11 +287,9 @@ App will be available at `http://localhost` (Nginx → Angular + API proxy).
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
-This TP is a learning resource — feel free to fork it, adapt it, or submit improvements via pull request.
-
-## 📜 License
+## License
 
 This project is licensed under the MIT License — see the [LICENSE](./LICENSE) file for details.
 
