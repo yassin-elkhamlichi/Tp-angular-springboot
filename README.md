@@ -10,10 +10,7 @@
 
 ---
 
-**Institution:** Harvard University — School of Engineering and Applied Sciences  
-**Course:** CS-E4200 — Modern Full-Stack Web Engineering  
-**Professor:** Dr. Y. Elkhamlichi  
-**Semester:** Fall 2026  
+**Author:** Yassine Elkhamlichi  
 
 ---
 

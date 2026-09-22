@@ -4,10 +4,7 @@
 
 ---
 
-**Institution:** Harvard University — School of Engineering and Applied Sciences  
-**Course:** CS-E4200 — Modern Full-Stack Web Engineering  
-**Professor:** Dr. Y. Elkhamlichi  
-**Semester:** Fall 2026  
+**Author:** Yassine Elkhamlichi  
 
 ---
 
@@ -3961,4 +3958,4 @@ JWT_SECRET=your_base64_encoded_secret_key_here
 ---
 
 *End of TP — Smart Inventory & Order Platform*  
-*© 2026 Harvard University — School of Engineering and Applied Sciences*
+*© 2026 Yassine Elkhamlichi*
