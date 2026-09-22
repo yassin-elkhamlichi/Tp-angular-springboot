@@ -1,0 +1,2068 @@
+\documentclass[12pt,a4paper]{report}
+
+% ============================================================
+% PACKAGES
+% ============================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{fontawesome5}
+\usepackage{tikz}
+\usepackage{etoolbox}
+\usepackage{mdframed}
+\usepackage{changepage}
+
+% ============================================================
+% COLORS
+% ============================================================
+\definecolor{harvardcrimson}{HTML}{A51C30}
+\definecolor{darkblue}{HTML}{1a1a2e}
+\definecolor{codeblue}{HTML}{0072B2}
+\definecolor{codebg}{HTML}{f5f5f5}
+\definecolor{springgreen}{HTML}{6DB33F}
+\definecolor{angularred}{HTML}{DD0031}
+\definecolor{warningyellow}{HTML}{F5A623}
+\definecolor{hintblue}{HTML}{3498DB}
+\definecolor{successgreen}{HTML}{27AE60}
+\definecolor{lightgray}{HTML}{EEEEEE}
+\definecolor{darkgray}{HTML}{333333}
+\definecolor{javaorange}{HTML}{F89820}
+
+% ============================================================
+% HYPERREF
+% ============================================================
+\hypersetup{
+    colorlinks=true,
+    linkcolor=harvardcrimson,
+    urlcolor=codeblue,
+    citecolor=harvardcrimson,
+    pdftitle={TP - Smart Inventory \& Order Platform},
+    pdfauthor={Dr. Y. Elkhamlichi},
+    pdfsubject={Full-Stack Angular \& Spring Boot}
+}
+
+% ============================================================
+% LISTINGS (Code)
+% ============================================================
+\lstdefinestyle{javastyle}{
+    language=Java,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{codeblue}\bfseries,
+    commentstyle=\color{gray}\itshape,
+    stringstyle=\color{springgreen},
+    backgroundcolor=\color{codebg},
+    frame=single,
+    rulecolor=\color{lightgray},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    numbersep=8pt,
+    breaklines=true,
+    breakatwhitespace=true,
+    showstringspaces=false,
+    tabsize=4,
+    xleftmargin=1.5em,
+    framexleftmargin=1em,
+    aboveskip=1em,
+    belowskip=1em,
+}
+
+\lstdefinelanguage{TypeScript}{
+    keywords={import, export, from, const, let, var, function, return, if, else, for, while, class, interface, extends, implements, new, this, super, constructor, public, private, protected, static, readonly, async, await, type, enum, true, false, null, undefined, of, in, as, void, number, string, boolean, any, never, unknown, signal, computed, effect, inject},
+    sensitive=true,
+    comment=[l]{//},
+    morecomment=[s]{/*}{*/},
+    string=[b]',
+    morestring=[b]",
+    morestring=[b]`,
+}
+
+\lstdefinestyle{tsstyle}{
+    language=TypeScript,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{codeblue}\bfseries,
+    commentstyle=\color{gray}\itshape,
+    stringstyle=\color{springgreen},
+    backgroundcolor=\color{codebg},
+    frame=single,
+    rulecolor=\color{lightgray},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    numbersep=8pt,
+    breaklines=true,
+    breakatwhitespace=true,
+    showstringspaces=false,
+    tabsize=2,
+    xleftmargin=1.5em,
+    framexleftmargin=1em,
+    aboveskip=1em,
+    belowskip=1em,
+}
+
+\lstdefinestyle{htmlstyle}{
+    language=HTML,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{angularred}\bfseries,
+    commentstyle=\color{gray}\itshape,
+    stringstyle=\color{springgreen},
+    backgroundcolor=\color{codebg},
+    frame=single,
+    rulecolor=\color{lightgray},
+    breaklines=true,
+    showstringspaces=false,
+    tabsize=2,
+    xleftmargin=1.5em,
+    framexleftmargin=1em,
+    aboveskip=1em,
+    belowskip=1em,
+}
+
+\lstdefinestyle{yamlstyle}{
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{codeblue}\bfseries,
+    commentstyle=\color{gray}\itshape,
+    stringstyle=\color{springgreen},
+    backgroundcolor=\color{codebg},
+    frame=single,
+    rulecolor=\color{lightgray},
+    breaklines=true,
+    showstringspaces=false,
+    tabsize=2,
+    xleftmargin=1.5em,
+    framexleftmargin=1em,
+    aboveskip=1em,
+    belowskip=1em,
+}
+
+\lstdefinestyle{dockerstyle}{
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{codeblue}\bfseries,
+    commentstyle=\color{gray}\itshape,
+    stringstyle=\color{springgreen},
+    backgroundcolor=\color{codebg},
+    frame=single,
+    rulecolor=\color{lightgray},
+    breaklines=true,
+    showstringspaces=false,
+    tabsize=2,
+    xleftmargin=1.5em,
+    framexleftmargin=1em,
+    aboveskip=1em,
+    belowskip=1em,
+}
+
+% ============================================================
+% CUSTOM BOXES
+% ============================================================
+\newtcolorbox{thinkbox}{
+    colback=hintblue!5,
+    colframe=hintblue,
+    title={\faIcon{brain} Think About It},
+    fonttitle=\bfseries,
+    arc=3mm,
+    boxrule=1pt,
+    left=8pt,
+    right=8pt,
+}
+
+\newtcolorbox{checkpoint}{
+    colback=successgreen!5,
+    colframe=successgreen,
+    title={\faIcon{check-circle} Checkpoint},
+    fonttitle=\bfseries,
+    arc=3mm,
+    boxrule=1pt,
+    left=8pt,
+    right=8pt,
+}
+
+\newtcolorbox{hintbox}{
+    colback=warningyellow!5,
+    colframe=warningyellow,
+    title={\faIcon{lightbulb} Hints},
+    fonttitle=\bfseries,
+    arc=3mm,
+    boxrule=1pt,
+    left=8pt,
+    right=8pt,
+}
+
+\newtcolorbox{infobox}{
+    colback=codeblue!5,
+    colframe=codeblue,
+    title={\faIcon{info-circle} Why?},
+    fonttitle=\bfseries,
+    arc=3mm,
+    boxrule=1pt,
+    left=8pt,
+    right=8pt,
+}
+
+% ============================================================
+% HEADERS & FOOTERS
+% ============================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textcolor{harvardcrimson}{\textbf{CS-E4200}} --- Smart Inventory Platform}
+\fancyhead[R]{\small\textcolor{gray}{Harvard SEAS}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.3pt}
+
+% ============================================================
+% TITLE FORMATTING
+% ============================================================
+\titleformat{\chapter}[display]
+    {\normalfont\huge\bfseries\color{harvardcrimson}}
+    {\chaptertitlename\ \thechapter}{20pt}{\Huge}
+\titleformat{\section}
+    {\normalfont\Large\bfseries\color{darkblue}}
+    {\thesection}{1em}{}
+\titleformat{\subsection}
+    {\normalfont\large\bfseries\color{darkblue}}
+    {\thesubsection}{1em}{}
+
+% ============================================================
+% DOCUMENT
+% ============================================================
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\begin{titlepage}
+\begin{center}
+
+\vspace*{1cm}
+
+{\Huge\textcolor{harvardcrimson}{\textbf{HARVARD UNIVERSITY}}}\\[0.3cm]
+{\large School of Engineering and Applied Sciences}\\[2cm]
+
+\rule{\textwidth}{1.5pt}\\[0.5cm]
+{\fontsize{28}{34}\selectfont\textbf{TP --- Smart Inventory}}\\[0.2cm]
+{\fontsize{28}{34}\selectfont\textbf{\& Order Platform}}\\[0.5cm]
+\rule{\textwidth}{1.5pt}\\[1.5cm]
+
+{\LARGE Full-Stack Development with}\\[0.5cm]
+{\Huge\textcolor{springgreen}{\textbf{Spring Boot 3.x}} \& \textcolor{angularred}{\textbf{Angular 18+}}}\\[2cm]
+
+\begin{tabular}{rl}
+\textbf{Course:} & CS-E4200 --- Modern Full-Stack Web Engineering \\[0.3cm]
+\textbf{Professor:} & Dr. Y. Elkhamlichi \\[0.3cm]
+\textbf{Semester:} & Fall 2026 \\[0.3cm]
+\textbf{Duration:} & 6 Weeks (2h/day) \\
+\end{tabular}
+
+\vfill
+
+\begin{tcolorbox}[colback=harvardcrimson!5, colframe=harvardcrimson, arc=5mm, boxrule=1.5pt, width=0.85\textwidth]
+\centering
+\textbf{\large Pedagogical Approach --- The 70/30 Golden Rule}\\[0.3cm]
+\textbf{30\%} reading documentation \& watching concepts\\
+$\downarrow$\\
+\textbf{70\%} hands-on coding inside a single repository\\[0.3cm]
+\textit{Every concept is immediately applied in the project. No isolated toy examples.}
+\end{tcolorbox}
+
+\end{center}
+\end{titlepage}
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% CHAPTER 1: LEARNING OBJECTIVES
+% ============================================================
+\chapter{What You Will Learn}
+
+By the end of this TP, you will have built a \textbf{complete, production-grade} full-stack application and mastered the following concepts:
+
+\section{Spring Boot 3.x (Backend)}
+
+\begin{longtable}{p{4.5cm}p{9cm}}
+\toprule
+\textbf{Concept} & \textbf{Description} \\
+\midrule
+\endhead
+Layered Architecture & Controller $\to$ Service $\to$ Repository --- strict separation of concerns \\[0.3cm]
+JPA / Hibernate & Entity mapping, relationships, \texttt{@EntityGraph}, DTO Projections \\[0.3cm]
+REST API Design & Versioned endpoints, proper HTTP verbs, status codes \\[0.3cm]
+Bean Validation & \texttt{@Valid}, \texttt{@NotBlank}, \texttt{@Min}, custom constraints \\[0.3cm]
+Global Error Handling & \texttt{@RestControllerAdvice}, \texttt{@ExceptionHandler}, structured error maps \\[0.3cm]
+Pagination \& Sorting & \texttt{Pageable}, \texttt{Page<T>}, dynamic search with JPA Specifications \\[0.3cm]
+Spring Security + JWT & Stateless authentication, \texttt{JwtAuthenticationFilter}, role-based access \\[0.3cm]
+Performance & N+1 problem diagnosis, \texttt{@EntityGraph}, DTO Projections \\
+\bottomrule
+\end{longtable}
+
+\section{Angular 18+ (Frontend)}
+
+\begin{longtable}{p{4.5cm}p{9cm}}
+\toprule
+\textbf{Concept} & \textbf{Description} \\
+\midrule
+\endhead
+Standalone Architecture & No \texttt{NgModule} --- \texttt{provideHttpClient()}, \texttt{provideRouter()} \\[0.3cm]
+Strongly-Typed Services & \texttt{HttpClient} with TypeScript interfaces \\[0.3cm]
+Modern Control Flow & \texttt{@for}, \texttt{@if}, \texttt{@switch}, \texttt{@defer} \\[0.3cm]
+Reactive Forms & \texttt{FormGroup}, \texttt{FormControl}, \texttt{Validators}, custom validators \\[0.3cm]
+Angular Signals & \texttt{signal()}, \texttt{computed()}, \texttt{effect()} for reactive state \\[0.3cm]
+RxJS Operators & \texttt{debounceTime}, \texttt{distinctUntilChanged}, \texttt{switchMap} \\[0.3cm]
+HTTP Interceptors & \texttt{HttpInterceptorFn} for token injection and error handling \\[0.3cm]
+Route Guards & \texttt{CanActivateFn} for protecting routes \\[0.3cm]
+Lazy Loading & \texttt{@defer (on viewport)} for performance optimization \\
+\bottomrule
+\end{longtable}
+
+\section{Architecture \& DevOps}
+
+\begin{longtable}{p{4.5cm}p{9cm}}
+\toprule
+\textbf{Concept} & \textbf{Description} \\
+\midrule
+\endhead
+Clean Project Structure & Industry-standard folder naming used by top tech companies \\[0.3cm]
+Full-Stack Integration & Frontend $\leftrightarrow$ Backend communication with proper CORS \\[0.3cm]
+Docker Compose & Multi-container deployment (DB + API + UI) \\[0.3cm]
+Debugging Skills & Network Tab, SQL logs, error tracing \\
+\bottomrule
+\end{longtable}
+
+% ============================================================
+% CHAPTER 2: PROJECT OVERVIEW
+% ============================================================
+\chapter{Project Overview \& Architecture}
+
+\section{Smart Inventory \& Order Platform}
+
+You are building a \textbf{professional inventory management system} with three main modules:
+
+\begin{itemize}[leftmargin=2cm]
+    \item[\faIcon{box}] \textbf{Products Module:} Live search, category filtering, pagination, sorting
+    \item[\faIcon{shopping-cart}] \textbf{Cart Module:} Add/remove items, update quantities, server sync
+    \item[\faIcon{lock}] \textbf{Admin Panel:} Role-based access, price management, stock control
+\end{itemize}
+
+\section{Backend Architecture (Spring Boot)}
+
+\begin{lstlisting}[style=yamlstyle, title={Spring Boot Project Structure}]
+smart-inventory-api/
+|-- src/main/java/com/smartinventory/
+|   |-- SmartInventoryApplication.java
+|   |-- config/
+|   |   |-- CorsConfig.java
+|   |   +-- SecurityConfig.java
+|   |-- controller/
+|   |   |-- AuthController.java
+|   |   |-- ProductController.java
+|   |   |-- CategoryController.java
+|   |   |-- CartController.java
+|   |   +-- AdminController.java
+|   |-- dto/
+|   |   |-- request/
+|   |   |   |-- LoginRequest.java
+|   |   |   |-- RegisterRequest.java
+|   |   |   |-- ProductRequest.java
+|   |   |   +-- CartItemRequest.java
+|   |   +-- response/
+|   |       |-- AuthResponse.java
+|   |       |-- ProductResponse.java
+|   |       |-- PageResponse.java
+|   |       +-- ErrorResponse.java
+|   |-- exception/
+|   |   |-- GlobalExceptionHandler.java
+|   |   |-- ResourceNotFoundException.java
+|   |   +-- BusinessException.java
+|   |-- model/
+|   |   |-- Product.java
+|   |   |-- Category.java
+|   |   |-- CartItem.java
+|   |   |-- Order.java
+|   |   +-- User.java
+|   |-- repository/
+|   |   |-- ProductRepository.java
+|   |   |-- CategoryRepository.java
+|   |   |-- CartItemRepository.java
+|   |   +-- UserRepository.java
+|   |-- security/
+|   |   |-- JwtService.java
+|   |   |-- JwtAuthenticationFilter.java
+|   |   +-- UserDetailsServiceImpl.java
+|   +-- service/
+|       |-- ProductService.java
+|       |-- CategoryService.java
+|       |-- CartService.java
+|       |-- AuthService.java
+|       +-- impl/
+|           |-- ProductServiceImpl.java
+|           |-- CategoryServiceImpl.java
+|           |-- CartServiceImpl.java
+|           +-- AuthServiceImpl.java
++-- pom.xml
+\end{lstlisting}
+
+\section{Frontend Architecture (Angular)}
+
+\begin{lstlisting}[style=yamlstyle, title={Angular Project Structure}]
+smart-inventory-ui/
++-- src/app/
+    |-- core/
+    |   |-- interceptors/
+    |   |   |-- auth.interceptor.ts
+    |   |   +-- error.interceptor.ts
+    |   |-- guards/
+    |   |   |-- auth.guard.ts
+    |   |   +-- admin.guard.ts
+    |   +-- services/
+    |       |-- auth.service.ts
+    |       +-- storage.service.ts
+    |-- features/
+    |   |-- auth/
+    |   |   |-- login/
+    |   |   |-- register/
+    |   |   |-- models/
+    |   |   +-- auth.routes.ts
+    |   |-- products/
+    |   |   |-- product-list/
+    |   |   |-- product-form/
+    |   |   |-- models/
+    |   |   |-- services/
+    |   |   +-- products.routes.ts
+    |   |-- cart/
+    |   +-- admin/
+    |-- shared/
+    |   |-- components/
+    |   |   |-- navbar/
+    |   |   +-- pagination/
+    |   +-- pipes/
+    |-- app.component.ts
+    |-- app.config.ts
+    +-- app.routes.ts
+\end{lstlisting}
+
+\begin{infobox}
+\textbf{Why this structure?} This is the standard used at companies like Google, Apple, and Microsoft.
+\begin{itemize}
+    \item \texttt{core/} --- Singleton services, guards, interceptors (instantiated ONCE)
+    \item \texttt{features/} --- Domain modules, each self-contained
+    \item \texttt{shared/} --- Reusable components, pipes, directives
+\end{itemize}
+\end{infobox}
+
+% ============================================================
+% CHAPTER 3: PHASE 1
+% ============================================================
+\chapter{Phase 1 --- Data Contract \& Basic Rendering}
+
+\textbf{Objective:} Establish the full-stack connection. By the end of this phase, your Angular app will fetch and display a list of products from your Spring Boot API.
+
+\textbf{Estimated Time:} 4 days (2h/day)
+
+% --- Exercise 1.1 ---
+\section{Exercise 1.1 --- Initialize the Spring Boot Project}
+
+\textbf{Context:} Every professional project starts with a well-configured foundation.
+
+\textbf{Tasks:}
+\begin{enumerate}
+    \item Go to \href{https://start.spring.io}{start.spring.io} and generate a project with:
+    \begin{itemize}
+        \item Group: \texttt{com.smartinventory}, Artifact: \texttt{smart-inventory-api}
+        \item Java 21
+        \item Dependencies: Spring Web, Spring Data JPA, PostgreSQL Driver, Lombok, Validation
+    \end{itemize}
+    \item Configure your database connection in \texttt{application.yml}. Think about:
+    \begin{itemize}
+        \item What is the JDBC URL format for PostgreSQL?
+        \item What property controls table auto-creation in JPA?
+        \item How do you enable SQL logging?
+    \end{itemize}
+    \item Create ALL the package folders shown in the Architecture Blueprint.
+\end{enumerate}
+
+\begin{thinkbox}
+Why do we separate \texttt{dto/request} and \texttt{dto/response} into sub-packages? What problem does this solve compared to putting all DTOs in a single package?
+\end{thinkbox}
+
+\begin{checkpoint}
+Your Spring Boot application starts without errors, connects to PostgreSQL, and the console shows the Hibernate dialect being used.
+\end{checkpoint}
+
+% --- Exercise 1.2 ---
+\section{Exercise 1.2 --- Design the Data Model}
+
+\textbf{Context:} The \texttt{model/} package contains your JPA entities. Start with \texttt{Product} and \texttt{Category}.
+
+\textbf{Tasks:}
+\begin{enumerate}
+    \item Create the \texttt{Category} entity: \texttt{id} (Long, auto-generated), \texttt{name} (String, unique), \texttt{description} (String), and a one-to-many relationship with products.
+    \item Create the \texttt{Product} entity: \texttt{id}, \texttt{name}, \texttt{description}, \texttt{price} (BigDecimal), \texttt{stockQuantity} (Integer), \texttt{imageUrl}, \texttt{createdAt}, \texttt{updatedAt}, and a many-to-one relationship with category.
+\end{enumerate}
+
+\begin{thinkbox}
+\begin{itemize}
+    \item Why do we use \texttt{BigDecimal} for price instead of \texttt{Double}?
+    \item What JPA annotation makes \texttt{createdAt} auto-populate on first save?
+    \item What is the difference between \texttt{FetchType.LAZY} and \texttt{FetchType.EAGER}?
+\end{itemize}
+\end{thinkbox}
+
+\begin{hintbox}
+Look at \texttt{@Entity}, \texttt{@Table}, \texttt{@Id}, \texttt{@GeneratedValue}, \texttt{@CreationTimestamp}, \texttt{@UpdateTimestamp}, \texttt{@ManyToOne}, \texttt{@OneToMany(mappedBy = "...")}
+\end{hintbox}
+
+\begin{checkpoint}
+Restart the app. Hibernate should auto-create \texttt{products} and \texttt{categories} tables.
+\end{checkpoint}
+
+% --- Exercise 1.3 ---
+\section{Exercise 1.3 --- Build the Repository Layer}
+
+\textbf{Context:} In Spring Data JPA, you don't write SQL --- you extend an interface.
+
+\textbf{Tasks:}
+\begin{enumerate}
+    \item Create \texttt{CategoryRepository} extending the appropriate Spring Data interface.
+    \item Create \texttt{ProductRepository} with a custom derived query method to find products by category ID.
+\end{enumerate}
+
+\begin{thinkbox}
+Spring Data JPA uses ``Derived Query Methods.'' If your entity has a field \texttt{category} with a sub-field \texttt{id}, what method name would automatically generate \texttt{WHERE category\_id = ?}?
+\end{thinkbox}
+
+% --- Exercise 1.4 ---
+\section{Exercise 1.4 --- Create the DTO Layer}
+
+\textbf{Context:} \textbf{Never expose your entities directly in API responses.} DTOs act as a shield between your database model and the outside world.
+
+\textbf{Tasks:}
+\begin{enumerate}
+    \item Create \texttt{ProductResponse} record with: \texttt{id}, \texttt{name}, \texttt{price}, \texttt{stockQuantity}, \texttt{imageUrl}, \texttt{categoryName}
+    \item Create \texttt{CategoryResponse} record with \texttt{id} and \texttt{name}
+    \item Create \texttt{ProductRequest} record with all creation fields including \texttt{categoryId}
+\end{enumerate}
+
+\begin{thinkbox}
+\begin{itemize}
+    \item Why do we use Java \texttt{record} instead of a regular class for DTOs?
+    \item Why does \texttt{ProductResponse} contain \texttt{categoryName} instead of \texttt{categoryId}?
+    \item What would happen if we returned the entity directly with a lazily loaded field?
+\end{itemize}
+\end{thinkbox}
+
+% --- Exercise 1.5 ---
+\section{Exercise 1.5 --- Implement the Service Layer}
+
+\textbf{Context:} The Service layer contains business logic. It receives DTOs from controllers and returns DTOs back.
+
+\textbf{Tasks:}
+\begin{enumerate}
+    \item Create a \texttt{ProductService} \textbf{interface} with: \texttt{getAllProducts()}, \texttt{getProductById(Long id)}, \texttt{createProduct(ProductRequest request)}
+    \item Create \texttt{ProductServiceImpl} implementing the interface:
+    \begin{itemize}
+        \item Inject repositories via constructor injection
+        \item Convert entities to DTOs in each method
+        \item Throw \texttt{ResourceNotFoundException} when not found
+    \end{itemize}
+\end{enumerate}
+
+\begin{thinkbox}
+\begin{itemize}
+    \item Why do we define an interface separate from the implementation?
+    \item Why constructor injection instead of \texttt{@Autowired} on fields?
+    \item Should entity-to-DTO conversion live in the service or a separate mapper?
+\end{itemize}
+\end{thinkbox}
+
+% --- Exercise 1.6 ---
+\section{Exercise 1.6 --- Build the REST Controller}
+
+\textbf{Context:} Controllers are the entry point of your API. They should be \textbf{thin} --- no business logic.
+
+\textbf{Tasks:}
+\begin{enumerate}
+    \item Create \texttt{ProductController} mapped to \texttt{/api/v1/products}
+    \item Implement: \texttt{GET /} (list), \texttt{GET /\{id\}} (detail), \texttt{POST /} (create with HTTP 201)
+\end{enumerate}
+
+\begin{thinkbox}
+\begin{itemize}
+    \item Why do we version the API with \texttt{/api/v1/}?
+    \item Should the controller return \texttt{ResponseEntity<T>} or just \texttt{T}?
+\end{itemize}
+\end{thinkbox}
+
+\begin{checkpoint}
+Test with Postman: create a product via POST, retrieve all via GET.
+\end{checkpoint}
+
+% --- Exercise 1.7 ---
+\section{Exercise 1.7 --- Configure CORS}
+
+\textbf{Context:} Your Angular app runs on port 4200, your API on 8080. Browsers block cross-origin requests by default.
+
+\textbf{Tasks:}
+\begin{enumerate}
+    \item Create \texttt{CorsConfig} implementing \texttt{WebMvcConfigurer}
+    \item Allow requests from \texttt{http://localhost:4200}
+    \item Allow methods: GET, POST, PUT, DELETE, OPTIONS
+\end{enumerate}
+
+\begin{thinkbox}
+Why is CORS a server-side configuration? In production, should you allow \texttt{*} (all origins)?
+\end{thinkbox}
+
+% --- Exercise 1.8 ---
+\section{Exercise 1.8 --- Initialize the Angular Project}
+
+\textbf{Tasks:}
+\begin{enumerate}
+    \item Generate: \texttt{ng new smart-inventory-ui --standalone --style=css --routing --ssr=false}
+    \item Create ALL folders from the Angular Architecture Blueprint
+    \item Configure environments with \texttt{apiUrl}
+    \item Set up \texttt{app.config.ts} with \texttt{provideHttpClient(withFetch())} and \texttt{provideRouter(routes)}
+\end{enumerate}
+
+\begin{thinkbox}
+What is the difference between the old NgModule architecture and Standalone? Why \texttt{withFetch()}?
+\end{thinkbox}
+
+% --- Exercise 1.9 ---
+\section{Exercise 1.9 --- Create TypeScript Models}
+
+\textbf{Tasks:}
+\begin{enumerate}
+    \item In \texttt{features/products/models/product.model.ts}, create \texttt{Product} and \texttt{ProductRequest} interfaces
+    \item Ensure they mirror the backend DTOs exactly
+\end{enumerate}
+
+\begin{thinkbox}
+Why do we use \texttt{interface} and not \texttt{class}? What happens if the backend adds a field you don't have?
+\end{thinkbox}
+
+% --- Exercise 1.10 ---
+\section{Exercise 1.10 --- Build the Product Service}
+
+\textbf{Tasks:}
+\begin{enumerate}
+    \item Create \texttt{product.service.ts} with \texttt{@Injectable(\{ providedIn: 'root' \})}
+    \item Implement strongly-typed methods: \texttt{getAll()}, \texttt{getById(id)}, \texttt{create(request)}
+\end{enumerate}
+
+\begin{thinkbox}
+Why does \texttt{HttpClient.get<Product[]>()} return an \texttt{Observable} instead of a \texttt{Promise}?
+\end{thinkbox}
+
+% --- Exercise 1.11 ---
+\section{Exercise 1.11 --- Create the Product List Component}
+
+\textbf{Tasks:}
+\begin{enumerate}
+    \item Generate: \texttt{ng generate component features/products/product-list --standalone}
+    \item Inject \texttt{ProductService}, fetch data in \texttt{ngOnInit()}
+    \item Use \texttt{@for} (not \texttt{*ngFor}) with \texttt{track} to display products
+    \item Use \texttt{@if} to show ``Out of Stock'' conditionally
+    \item Use \texttt{@empty} block for empty lists
+    \item Set up routing in \texttt{app.routes.ts}
+\end{enumerate}
+
+\begin{thinkbox}
+What is the \texttt{track} expression in \texttt{@for}? What is the memory leak risk with \texttt{subscribe()} in \texttt{ngOnInit()}?
+\end{thinkbox}
+
+\begin{checkpoint}
+Navigate to \texttt{http://localhost:4200/products}. Products from your API should appear.
+\end{checkpoint}
+
+% --- Exercise 1.12 ---
+\section{Exercise 1.12 --- Navigation \& Layout}
+
+\textbf{Tasks:}
+\begin{enumerate}
+    \item Create \texttt{NavbarComponent} in \texttt{shared/components/navbar/}
+    \item Use \texttt{routerLink} (not \texttt{href}) and \texttt{routerLinkActive}
+    \item Update \texttt{app.component.html} with navbar and \texttt{<router-outlet>}
+\end{enumerate}
+
+\begin{thinkbox}
+Why \texttt{routerLink} instead of \texttt{href}? What happens to the page state with \texttt{href}?
+\end{thinkbox}
+
+% ============================================================
+% CHAPTER 4: PHASE 2
+% ============================================================
+\chapter{Phase 2 --- Reactive Forms \& Error Handling}
+
+\textbf{Objective:} Build a product creation form with client-side and server-side validation.
+
+% --- Exercise 2.1 ---
+\section{Exercise 2.1 --- Backend Validation}
+
+\textbf{Tasks:}
+\begin{enumerate}
+    \item Add validation annotations to \texttt{ProductRequest}: \texttt{@NotBlank}, \texttt{@Size}, \texttt{@DecimalMin}, \texttt{@Min}, \texttt{@NotNull}
+    \item Activate validation with \texttt{@Valid} on the controller parameter
+\end{enumerate}
+
+\begin{thinkbox}
+What is the difference between \texttt{@NotNull}, \texttt{@NotEmpty}, and \texttt{@NotBlank}?
+\end{thinkbox}
+
+% --- Exercise 2.2 ---
+\section{Exercise 2.2 --- Global Error Handler}
+
+\textbf{Tasks:}
+\begin{enumerate}
+    \item Create \texttt{ErrorResponse} record: \texttt{timestamp}, \texttt{status}, \texttt{error}, \texttt{errors} (Map)
+    \item Create \texttt{GlobalExceptionHandler} with \texttt{@RestControllerAdvice}:
+    \begin{itemize}
+        \item Handle \texttt{MethodArgumentNotValidException} $\to$ HTTP 400 with field errors
+        \item Handle \texttt{ResourceNotFoundException} $\to$ HTTP 404
+        \item Handle generic \texttt{Exception} $\to$ HTTP 500 (never expose stack traces!)
+    \end{itemize}
+\end{enumerate}
+
+\begin{thinkbox}
+Why is \texttt{@RestControllerAdvice} better than try-catch in every controller? What's the difference between what you \emph{log} and what you \emph{return}?
+\end{thinkbox}
+
+% --- Exercise 2.3 ---
+\section{Exercise 2.3 --- Product Form (Angular)}
+
+\textbf{Tasks:}
+\begin{enumerate}
+    \item Build a \texttt{FormGroup} with \texttt{FormControl} and \texttt{Validators} for each field
+    \item On submit: \texttt{markAllAsTouched()}, validate, then call the service
+    \item Display validation errors below each field (only when touched AND invalid)
+\end{enumerate}
+
+\begin{thinkbox}
+What is ``touched'' vs ``dirty''? Why \texttt{markAllAsTouched()} on submit?
+\end{thinkbox}
+
+% --- Exercise 2.4 ---
+\section{Exercise 2.4 --- Display Server-Side Errors}
+
+\textbf{Tasks:}
+\begin{enumerate}
+    \item Create a \texttt{serverErrors} object to store error map from HTTP 400 responses
+    \item Display server errors under the corresponding fields
+    \item Clear server errors when the user starts typing (listen to \texttt{valueChanges})
+\end{enumerate}
+
+% --- Exercise 2.5 ---
+\section{Exercise 2.5 --- Custom Validator}
+
+\textbf{Tasks:}
+\begin{enumerate}
+    \item Create a custom validator function for price format (max 2 decimal places)
+    \item Return \texttt{\{ invalidPrice: true \}} if invalid, \texttt{null} if valid
+    \item Apply to the price \texttt{FormControl} and display the error message
+\end{enumerate}
+
+\begin{thinkbox}
+What is the difference between a synchronous and async validator? When would you need async?
+\end{thinkbox}
+
+% ============================================================
+% CHAPTER 5: PHASE 3
+% ============================================================
+\chapter{Phase 3 --- Signals \& RxJS Pipeline}
+
+\textbf{Objective:} Implement live search, pagination, and sorting. Master Angular Signals and RxJS operators.
+
+% --- Exercise 3.1 ---
+\section{Exercise 3.1 --- Backend Pagination \& Sorting}
+
+\textbf{Tasks:}
+\begin{enumerate}
+    \item Modify service to accept \texttt{Pageable} and return \texttt{Page<ProductResponse>}
+    \item Create \texttt{PageResponse<T>} generic DTO
+    \item Update controller to accept \texttt{page}, \texttt{size}, \texttt{sort} query parameters
+\end{enumerate}
+
+\begin{thinkbox}
+What SQL query does \texttt{Pageable} generate? What is the difference between \texttt{Slice<T>} and \texttt{Page<T>}?
+\end{thinkbox}
+
+% --- Exercise 3.2 ---
+\section{Exercise 3.2 --- Dynamic Search with JPA Specifications}
+
+\textbf{Tasks:}
+\begin{enumerate}
+    \item Extend \texttt{ProductRepository} with \texttt{JpaSpecificationExecutor<Product>}
+    \item Create static specification methods: \texttt{hasName()}, \texttt{hasCategory()}, \texttt{hasPriceRange()}
+    \item Combine specifications with \texttt{.and()} in the service layer
+\end{enumerate}
+
+\begin{thinkbox}
+How does the Specification pattern implement the Strategy design pattern? What if all parameters are null?
+\end{thinkbox}
+
+% --- Exercise 3.3 ---
+\section{Exercise 3.3 --- Angular Signals}
+
+\textbf{Tasks:}
+\begin{enumerate}
+    \item Replace plain variables with \texttt{signal()}: \texttt{products}, \texttt{loading}, \texttt{currentPage}
+    \item Create \texttt{computed()} signals for derived state
+    \item Update templates to use \texttt{()} syntax: \texttt{products()}, \texttt{loading()}
+    \item Use \texttt{.set()} and \texttt{.update()} appropriately
+\end{enumerate}
+
+\begin{thinkbox}
+What is the difference between \texttt{signal.set()} and \texttt{signal.update()}? How do Signals compare to React's \texttt{useState()}?
+\end{thinkbox}
+
+% --- Exercise 3.4 ---
+\section{Exercise 3.4 --- Live Search with RxJS}
+
+\textbf{Tasks:}
+\begin{enumerate}
+    \item Add a search \texttt{FormControl} bound to an input
+    \item Build the RxJS pipeline: \texttt{valueChanges} $\to$ \texttt{debounceTime(300)} $\to$ \texttt{distinctUntilChanged()} $\to$ \texttt{switchMap()} $\to$ \texttt{subscribe()}
+    \item Clean up with \texttt{takeUntil(destroy\$)} in \texttt{ngOnDestroy()}
+\end{enumerate}
+
+\begin{thinkbox}
+Why is \texttt{switchMap} the correct operator, not \texttt{mergeMap} or \texttt{concatMap}? What does ``cancel the previous request'' mean at the HTTP level?
+\end{thinkbox}
+
+\begin{checkpoint}
+Type in the search box. Check the Network tab --- previous requests should be cancelled.
+\end{checkpoint}
+
+% --- Exercise 3.5 ---
+\section{Exercise 3.5 --- Reusable Pagination Component}
+
+\textbf{Tasks:}
+\begin{enumerate}
+    \item Create \texttt{PaginationComponent} in \texttt{shared/components/pagination/}
+    \item Define inputs: \texttt{currentPage}, \texttt{totalPages}
+    \item Define output: \texttt{pageChange} event
+    \item Display Previous/Next buttons with page numbers
+\end{enumerate}
+
+\begin{thinkbox}
+What is a ``smart'' vs ``dumb/presentational'' component? Which is PaginationComponent?
+\end{thinkbox}
+
+% ============================================================
+% CHAPTER 6: PHASE 4
+% ============================================================
+\chapter{Phase 4 --- JWT Security \& Interceptors}
+
+\textbf{Objective:} Implement complete authentication and authorization.
+
+% --- Exercise 4.1 ---
+\section{Exercise 4.1 --- User Entity \& Auth DTOs}
+
+\textbf{Tasks:}
+\begin{enumerate}
+    \item Create \texttt{User} entity with: \texttt{id}, \texttt{firstName}, \texttt{lastName}, \texttt{email}, \texttt{password} (hashed), \texttt{role} (enum: USER, ADMIN)
+    \item Create \texttt{LoginRequest}, \texttt{RegisterRequest}, \texttt{AuthResponse} DTOs
+    \item Create \texttt{UserRepository} with \texttt{findByEmail()} and \texttt{existsByEmail()}
+\end{enumerate}
+
+\begin{thinkbox}
+Why hashed passwords? Should \texttt{Role} be an entity or enum? Where should password-match validation happen?
+\end{thinkbox}
+
+% --- Exercise 4.2 ---
+\section{Exercise 4.2 --- JWT Service}
+
+\textbf{Tasks:}
+\begin{enumerate}
+    \item Add jjwt dependencies to \texttt{pom.xml}
+    \item Implement \texttt{JwtService}: \texttt{generateToken()}, \texttt{extractUsername()}, \texttt{isTokenValid()}
+    \item Store secret key in \texttt{application.yml}
+\end{enumerate}
+
+\begin{thinkbox}
+What are the three parts of a JWT? Why is the secret key critical? Symmetric vs asymmetric signing?
+\end{thinkbox}
+
+% --- Exercise 4.3 ---
+\section{Exercise 4.3 --- Spring Security Configuration}
+
+\textbf{Tasks:}
+\begin{enumerate}
+    \item Create \texttt{UserDetailsServiceImpl} implementing \texttt{UserDetailsService}
+    \item Create \texttt{JwtAuthenticationFilter} extending \texttt{OncePerRequestFilter}
+    \item Create \texttt{SecurityConfig}: disable CSRF, set STATELESS sessions, configure URL authorization, add JWT filter
+\end{enumerate}
+
+\begin{thinkbox}
+Why disable CSRF for a REST API? What does ``stateless'' mean? Why must the JWT filter run before \texttt{UsernamePasswordAuthenticationFilter}?
+\end{thinkbox}
+
+% --- Exercise 4.4 ---
+\section{Exercise 4.4 --- Auth Service \& Controller}
+
+\textbf{Tasks:}
+\begin{enumerate}
+    \item Implement \texttt{AuthService}: register (check duplicates, hash password, generate token), login (authenticate, generate token)
+    \item Create \texttt{AuthController}: \texttt{POST /auth/register}, \texttt{POST /auth/login}
+\end{enumerate}
+
+\begin{checkpoint}
+Register $\to$ get token. Login $\to$ get token. Use token to access \texttt{GET /products}.
+\end{checkpoint}
+
+% --- Exercise 4.5-4.6 ---
+\section{Exercise 4.5 --- Angular Auth \& Interceptors}
+
+\textbf{Tasks:}
+\begin{enumerate}
+    \item Create \texttt{StorageService}: \texttt{setToken()}, \texttt{getToken()}, \texttt{removeToken()}, \texttt{isLoggedIn()}
+    \item Create \texttt{AuthService}: \texttt{login()}, \texttt{register()}, \texttt{logout()}, \texttt{getUserRole()}
+    \item Create \texttt{authInterceptor}: clone requests and add \texttt{Authorization: Bearer <token>}
+    \item Create \texttt{errorInterceptor}: redirect on 401, handle 403
+    \item Register interceptors in \texttt{app.config.ts}
+\end{enumerate}
+
+\begin{thinkbox}
+Why clone the request? Why skip auth endpoints? Why is \texttt{localStorage} a security risk (XSS)?
+\end{thinkbox}
+
+% --- Exercise 4.7-4.8 ---
+\section{Exercise 4.7 --- Route Guards \& Auth Pages}
+
+\textbf{Tasks:}
+\begin{enumerate}
+    \item Create \texttt{authGuard} (\texttt{CanActivateFn}): check login, redirect to \texttt{/auth/login}
+    \item Create \texttt{adminGuard}: check ADMIN role
+    \item Apply guards to routes
+    \item Build \texttt{LoginComponent} and \texttt{RegisterComponent} with Reactive Forms
+    \item Implement cross-field validator for password confirmation
+\end{enumerate}
+
+\begin{checkpoint}
+Complete auth flow: Register $\to$ Login $\to$ Access protected pages $\to$ Logout $\to$ Redirect.
+\end{checkpoint}
+
+% ============================================================
+% CHAPTER 7: PHASE 5
+% ============================================================
+\chapter{Phase 5 --- Production Readiness}
+
+\textbf{Objective:} Optimize performance, solve N+1, add lazy loading, containerize with Docker.
+
+\section{Exercise 5.1 --- N+1 Problem}
+
+\textbf{Tasks:}
+\begin{enumerate}
+    \item Enable SQL logging, count queries for a product list
+    \item Fix with \texttt{@EntityGraph(attributePaths = \{"category"\})}
+    \item Alternative: DTO Projection with JPQL \texttt{SELECT new}
+\end{enumerate}
+
+\begin{thinkbox}
+Why is \texttt{FetchType.EAGER} not a good fix? When is DTO Projection better than \texttt{@EntityGraph}?
+\end{thinkbox}
+
+\section{Exercise 5.2 --- Angular Deferred Loading}
+
+\textbf{Tasks:}
+\begin{enumerate}
+    \item Wrap heavy components in \texttt{@defer (on viewport)} blocks
+    \item Create skeleton loader CSS animations
+    \item Experiment with \texttt{(on idle)}, \texttt{(on timer)}, \texttt{(when condition)}
+\end{enumerate}
+
+\section{Exercise 5.3 --- Docker Compose}
+
+\textbf{Tasks:}
+\begin{enumerate}
+    \item Create multi-stage \texttt{Dockerfile} for Spring Boot (Maven build $\to$ JRE run)
+    \item Create multi-stage \texttt{Dockerfile} for Angular (Node build $\to$ Nginx serve)
+    \item Create \texttt{nginx.conf} with API proxy and SPA routing
+    \item Create \texttt{docker-compose.yml} with 3 services: db, api, ui
+\end{enumerate}
+
+\begin{thinkbox}
+Why multi-stage builds? Why does Nginx proxy API requests? What is a Docker volume?
+\end{thinkbox}
+
+\begin{checkpoint}
+\texttt{docker-compose up --build} $\to$ Full application at \texttt{http://localhost}.
+\end{checkpoint}
+
+\section{Exercise 5.4 --- Admin Panel}
+
+\textbf{Tasks:}
+\begin{enumerate}
+    \item Backend: \texttt{AdminController} with PUT/DELETE endpoints, protected by \texttt{@PreAuthorize}
+    \item Frontend: Dashboard with editable product table, delete with confirmation
+    \item Route protection with \texttt{adminGuard}
+\end{enumerate}
+
+\begin{thinkbox}
+Why do we need BOTH \texttt{@PreAuthorize} (backend) AND route guards (frontend)? What if you only protect the frontend?
+\end{thinkbox}
+
+% ============================================================
+% PART II: SOLUTIONS
+% ============================================================
+\part{Solutions}
+
+% ============================================================
+% CHAPTER 8: SOLUTIONS PHASE 1
+% ============================================================
+\chapter{Solution --- Phase 1}
+
+\section{Solution 1.1 --- application.yml}
+
+\begin{lstlisting}[style=yamlstyle, title={application.yml}]
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/smart_inventory
+    username: postgres
+    password: secret
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+\end{lstlisting}
+
+\section{Solution 1.2 --- Data Model}
+
+\begin{lstlisting}[style=javastyle, title={model/Category.java}]
+package com.smartinventory.model;
+
+import jakarta.persistence.*;
+import lombok.*;
+import java.util.List;
+
+@Entity
+@Table(name = "categories")
+@Getter @Setter
+@NoArgsConstructor @AllArgsConstructor
+@Builder
+public class Category {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false, unique = true)
+    private String name;
+
+    private String description;
+
+    @OneToMany(mappedBy = "category",
+               cascade = CascadeType.ALL,
+               fetch = FetchType.LAZY)
+    private List<Product> products;
+}
+\end{lstlisting}
+
+\begin{lstlisting}[style=javastyle, title={model/Product.java}]
+package com.smartinventory.model;
+
+import jakarta.persistence.*;
+import lombok.*;
+import org.hibernate.annotations.*;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "products")
+@Getter @Setter
+@NoArgsConstructor @AllArgsConstructor
+@Builder
+public class Product {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
+    private String name;
+
+    private String description;
+
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal price;
+
+    @Column(name = "stock_quantity", nullable = false)
+    private Integer stockQuantity;
+
+    @Column(name = "image_url")
+    private String imageUrl;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
+
+    @CreationTimestamp
+    @Column(name = "created_at", updatable = false)
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+}
+\end{lstlisting}
+
+\begin{infobox}
+\textbf{Why BigDecimal?} \texttt{Double} uses floating-point: \texttt{0.1 + 0.2 = 0.30000000000000004}. For financial calculations, \texttt{BigDecimal} provides exact precision.\\[0.2cm]
+\textbf{Why FetchType.LAZY?} With EAGER, loading 100 products loads 100 categories immediately. LAZY loads only when accessed.
+\end{infobox}
+
+\section{Solution 1.3 --- Repositories}
+
+\begin{lstlisting}[style=javastyle, title={repository/ProductRepository.java}]
+package com.smartinventory.repository;
+
+import com.smartinventory.model.Product;
+import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
+
+public interface ProductRepository
+        extends JpaRepository<Product, Long> {
+    List<Product> findByCategoryId(Long categoryId);
+}
+\end{lstlisting}
+
+\section{Solution 1.4 --- DTOs}
+
+\begin{lstlisting}[style=javastyle, title={dto/response/ProductResponse.java}]
+package com.smartinventory.dto.response;
+
+import java.math.BigDecimal;
+
+public record ProductResponse(
+    Long id,
+    String name,
+    String description,
+    BigDecimal price,
+    Integer stockQuantity,
+    String imageUrl,
+    String categoryName
+) {}
+\end{lstlisting}
+
+\begin{lstlisting}[style=javastyle, title={dto/request/ProductRequest.java}]
+package com.smartinventory.dto.request;
+
+import java.math.BigDecimal;
+
+public record ProductRequest(
+    String name,
+    String description,
+    BigDecimal price,
+    Integer stockQuantity,
+    String imageUrl,
+    Long categoryId
+) {}
+\end{lstlisting}
+
+\section{Solution 1.5 --- Service Layer}
+
+\begin{lstlisting}[style=javastyle, title={exception/ResourceNotFoundException.java}]
+package com.smartinventory.exception;
+
+public class ResourceNotFoundException
+        extends RuntimeException {
+    public ResourceNotFoundException(String message) {
+        super(message);
+    }
+}
+\end{lstlisting}
+
+\begin{lstlisting}[style=javastyle, title={service/impl/ProductServiceImpl.java}]
+package com.smartinventory.service.impl;
+
+import com.smartinventory.dto.request.ProductRequest;
+import com.smartinventory.dto.response.ProductResponse;
+import com.smartinventory.exception.*;
+import com.smartinventory.model.*;
+import com.smartinventory.repository.*;
+import com.smartinventory.service.ProductService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
+@RequiredArgsConstructor
+public class ProductServiceImpl
+        implements ProductService {
+
+    private final ProductRepository productRepository;
+    private final CategoryRepository categoryRepository;
+
+    @Override
+    public List<ProductResponse> getAllProducts() {
+        return productRepository.findAll()
+            .stream()
+            .map(this::mapToResponse)
+            .collect(Collectors.toList());
+    }
+
+    @Override
+    public ProductResponse getProductById(Long id) {
+        Product product = productRepository.findById(id)
+            .orElseThrow(() ->
+                new ResourceNotFoundException(
+                    "Product not found with id: " + id));
+        return mapToResponse(product);
+    }
+
+    @Override
+    public ProductResponse createProduct(
+            ProductRequest request) {
+        Category category = categoryRepository
+            .findById(request.categoryId())
+            .orElseThrow(() ->
+                new ResourceNotFoundException(
+                    "Category not found with id: "
+                    + request.categoryId()));
+
+        Product product = Product.builder()
+            .name(request.name())
+            .description(request.description())
+            .price(request.price())
+            .stockQuantity(request.stockQuantity())
+            .imageUrl(request.imageUrl())
+            .category(category)
+            .build();
+
+        Product saved = productRepository.save(product);
+        return mapToResponse(saved);
+    }
+
+    private ProductResponse mapToResponse(Product p) {
+        return new ProductResponse(
+            p.getId(), p.getName(),
+            p.getDescription(), p.getPrice(),
+            p.getStockQuantity(), p.getImageUrl(),
+            p.getCategory().getName());
+    }
+}
+\end{lstlisting}
+
+\section{Solution 1.6 --- Controller}
+
+\begin{lstlisting}[style=javastyle, title={controller/ProductController.java}]
+package com.smartinventory.controller;
+
+import com.smartinventory.dto.request.ProductRequest;
+import com.smartinventory.dto.response.ProductResponse;
+import com.smartinventory.service.ProductService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.*;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/v1/products")
+@RequiredArgsConstructor
+public class ProductController {
+
+    private final ProductService productService;
+
+    @GetMapping
+    public ResponseEntity<List<ProductResponse>>
+            getAllProducts() {
+        return ResponseEntity.ok(
+            productService.getAllProducts());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductResponse>
+            getProductById(@PathVariable Long id) {
+        return ResponseEntity.ok(
+            productService.getProductById(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<ProductResponse>
+            createProduct(
+                @RequestBody ProductRequest request) {
+        ProductResponse response =
+            productService.createProduct(request);
+        return ResponseEntity
+            .status(HttpStatus.CREATED)
+            .body(response);
+    }
+}
+\end{lstlisting}
+
+\section{Solution 1.7 --- CORS}
+
+\begin{lstlisting}[style=javastyle, title={config/CorsConfig.java}]
+package com.smartinventory.config;
+
+import org.springframework.context.annotation.*;
+import org.springframework.web.servlet.config.annotation.*;
+
+@Configuration
+public class CorsConfig
+        implements WebMvcConfigurer {
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/api/**")
+            .allowedOrigins("http://localhost:4200")
+            .allowedMethods("GET", "POST",
+                "PUT", "DELETE", "OPTIONS")
+            .allowedHeaders("*")
+            .allowCredentials(true)
+            .maxAge(3600);
+    }
+}
+\end{lstlisting}
+
+\section{Solution 1.8--1.12 --- Angular Setup}
+
+\begin{lstlisting}[style=tsstyle, title={src/environments/environment.development.ts}]
+export const environment = {
+  production: false,
+  apiUrl: 'http://localhost:8080/api/v1'
+};
+\end{lstlisting}
+
+\begin{lstlisting}[style=tsstyle, title={src/app/app.config.ts}]
+import { ApplicationConfig } from '@angular/core';
+import { provideRouter } from '@angular/router';
+import { provideHttpClient, withFetch }
+  from '@angular/common/http';
+import { routes } from './app.routes';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideRouter(routes),
+    provideHttpClient(withFetch())
+  ]
+};
+\end{lstlisting}
+
+\begin{lstlisting}[style=tsstyle, title={features/products/models/product.model.ts}]
+export interface Product {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  stockQuantity: number;
+  imageUrl: string;
+  categoryName: string;
+}
+
+export interface ProductRequest {
+  name: string;
+  description: string;
+  price: number;
+  stockQuantity: number;
+  imageUrl: string;
+  categoryId: number;
+}
+\end{lstlisting}
+
+\begin{lstlisting}[style=tsstyle, title={features/products/services/product.service.ts}]
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Product, ProductRequest }
+  from '../models/product.model';
+import { environment }
+  from '../../../../environments/environment';
+
+@Injectable({ providedIn: 'root' })
+export class ProductService {
+  private readonly apiUrl =
+    `${environment.apiUrl}/products`;
+
+  constructor(private http: HttpClient) {}
+
+  getAll(): Observable<Product[]> {
+    return this.http.get<Product[]>(this.apiUrl);
+  }
+
+  getById(id: number): Observable<Product> {
+    return this.http.get<Product>(
+      `${this.apiUrl}/${id}`);
+  }
+
+  create(req: ProductRequest): Observable<Product> {
+    return this.http.post<Product>(this.apiUrl, req);
+  }
+}
+\end{lstlisting}
+
+\begin{lstlisting}[style=tsstyle, title={features/products/product-list/product-list.component.ts}]
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ProductService }
+  from '../services/product.service';
+import { Product } from '../models/product.model';
+
+@Component({
+  selector: 'app-product-list',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './product-list.component.html'
+})
+export class ProductListComponent implements OnInit {
+  products: Product[] = [];
+  loading = true;
+  error = '';
+
+  constructor(private productService: ProductService) {}
+
+  ngOnInit(): void {
+    this.productService.getAll().subscribe({
+      next: (data) => {
+        this.products = data;
+        this.loading = false;
+      },
+      error: (err) => {
+        this.error = 'Failed to load products';
+        this.loading = false;
+      }
+    });
+  }
+}
+\end{lstlisting}
+
+\begin{lstlisting}[style=htmlstyle, title={product-list.component.html}]
+<div class="product-list-container">
+  <h1>Product Catalog</h1>
+
+  @if (loading) {
+    <p>Loading products...</p>
+  }
+
+  @if (!loading && !error) {
+    <div class="product-grid">
+      @for (product of products; track product.id) {
+        <div class="product-card">
+          <h3>{{ product.name }}</h3>
+          <p>{{ product.categoryName }}</p>
+          <p>{{ product.price | currency:'USD' }}</p>
+          @if (product.stockQuantity === 0) {
+            <p class="out-of-stock">Out of Stock</p>
+          } @else {
+            <p>In Stock: {{ product.stockQuantity }}</p>
+          }
+        </div>
+      } @empty {
+        <p>No products found.</p>
+      }
+    </div>
+  }
+</div>
+\end{lstlisting}
+
+% ============================================================
+% CHAPTER 9: SOLUTIONS PHASE 2
+% ============================================================
+\chapter{Solution --- Phase 2}
+
+\section{Solution 2.1 --- Bean Validation}
+
+\begin{lstlisting}[style=javastyle, title={dto/request/ProductRequest.java (updated)}]
+package com.smartinventory.dto.request;
+
+import jakarta.validation.constraints.*;
+import java.math.BigDecimal;
+
+public record ProductRequest(
+    @NotBlank(message = "Product name is required")
+    @Size(max = 100,
+          message = "Name must be at most 100 chars")
+    String name,
+
+    @Size(max = 500)
+    String description,
+
+    @NotNull(message = "Price is required")
+    @DecimalMin(value = "0.01",
+                message = "Price must be > 0")
+    BigDecimal price,
+
+    @NotNull(message = "Stock quantity is required")
+    @Min(value = 0,
+         message = "Stock cannot be negative")
+    Integer stockQuantity,
+
+    String imageUrl,
+
+    @NotNull(message = "Category is required")
+    Long categoryId
+) {}
+\end{lstlisting}
+
+\section{Solution 2.2 --- Global Error Handler}
+
+\begin{lstlisting}[style=javastyle, title={exception/GlobalExceptionHandler.java}]
+package com.smartinventory.exception;
+
+import com.smartinventory.dto.response.ErrorResponse;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.*;
+import java.time.LocalDateTime;
+import java.util.*;
+
+@RestControllerAdvice
+public class GlobalExceptionHandler {
+
+    @ExceptionHandler(
+        MethodArgumentNotValidException.class)
+    public ResponseEntity<ErrorResponse>
+            handleValidation(
+                MethodArgumentNotValidException ex) {
+        Map<String, String> errors = new HashMap<>();
+        ex.getBindingResult().getFieldErrors()
+            .forEach((FieldError fe) ->
+                errors.put(fe.getField(),
+                           fe.getDefaultMessage()));
+
+        ErrorResponse response = new ErrorResponse(
+            LocalDateTime.now(),
+            HttpStatus.BAD_REQUEST.value(),
+            "Validation Failed", errors);
+
+        return ResponseEntity
+            .status(HttpStatus.BAD_REQUEST)
+            .body(response);
+    }
+
+    @ExceptionHandler(
+        ResourceNotFoundException.class)
+    public ResponseEntity<ErrorResponse>
+            handleNotFound(
+                ResourceNotFoundException ex) {
+        ErrorResponse response = new ErrorResponse(
+            LocalDateTime.now(),
+            HttpStatus.NOT_FOUND.value(),
+            ex.getMessage(), null);
+        return ResponseEntity
+            .status(HttpStatus.NOT_FOUND)
+            .body(response);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorResponse>
+            handleGeneric(Exception ex) {
+        ex.printStackTrace();
+        ErrorResponse response = new ErrorResponse(
+            LocalDateTime.now(),
+            HttpStatus.INTERNAL_SERVER_ERROR.value(),
+            "An unexpected error occurred", null);
+        return ResponseEntity
+            .status(HttpStatus.INTERNAL_SERVER_ERROR)
+            .body(response);
+    }
+}
+\end{lstlisting}
+
+\section{Solution 2.3--2.5 --- Angular Forms}
+
+\begin{lstlisting}[style=tsstyle, title={product-form.component.ts}]
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormGroup,
+  FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ProductService }
+  from '../services/product.service';
+import { HttpErrorResponse }
+  from '@angular/common/http';
+import { priceFormatValidator }
+  from '../validators/price.validator';
+
+@Component({
+  selector: 'app-product-form',
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule],
+  templateUrl: './product-form.component.html'
+})
+export class ProductFormComponent {
+  serverErrors: { [key: string]: string } = {};
+  submitting = false;
+
+  form = new FormGroup({
+    name: new FormControl('', [
+      Validators.required,
+      Validators.minLength(2),
+      Validators.maxLength(100)
+    ]),
+    description: new FormControl('',
+      [Validators.maxLength(500)]),
+    price: new FormControl<number | null>(null, [
+      Validators.required,
+      Validators.min(0.01),
+      priceFormatValidator
+    ]),
+    stockQuantity: new FormControl<number | null>(
+      null, [Validators.required, Validators.min(0)]),
+    imageUrl: new FormControl(''),
+    categoryId: new FormControl<number | null>(
+      null, [Validators.required])
+  });
+
+  constructor(
+    private productService: ProductService,
+    private router: Router
+  ) {
+    this.form.valueChanges.subscribe(() => {
+      this.serverErrors = {};
+    });
+  }
+
+  onSubmit(): void {
+    this.form.markAllAsTouched();
+    if (this.form.invalid) return;
+
+    this.submitting = true;
+    this.productService.create(
+      this.form.value as any
+    ).subscribe({
+      next: () =>
+        this.router.navigate(['/products']),
+      error: (err: HttpErrorResponse) => {
+        this.submitting = false;
+        if (err.status === 400 && err.error?.errors) {
+          this.serverErrors = err.error.errors;
+        }
+      }
+    });
+  }
+
+  hasError(field: string, type: string): boolean {
+    const ctrl = this.form.get(field);
+    return !!(ctrl?.hasError(type) && ctrl?.touched);
+  }
+}
+\end{lstlisting}
+
+\begin{lstlisting}[style=tsstyle, title={validators/price.validator.ts}]
+import { AbstractControl, ValidationErrors }
+  from '@angular/forms';
+
+export function priceFormatValidator(
+    control: AbstractControl
+): ValidationErrors | null {
+  const value = control.value;
+  if (!value) return null;
+
+  const str = value.toString();
+  const dotIndex = str.indexOf('.');
+  if (dotIndex !== -1) {
+    const decimals = str.length - dotIndex - 1;
+    if (decimals > 2) return { invalidPrice: true };
+  }
+  return null;
+}
+\end{lstlisting}
+
+% ============================================================
+% CHAPTER 10: SOLUTIONS PHASE 3
+% ============================================================
+\chapter{Solution --- Phase 3}
+
+\section{Solution 3.1--3.2 --- Pagination \& Specifications}
+
+\begin{lstlisting}[style=javastyle, title={repository/ProductSpecification.java}]
+package com.smartinventory.repository;
+
+import com.smartinventory.model.Product;
+import org.springframework.data.jpa.domain.Specification;
+import java.math.BigDecimal;
+
+public class ProductSpecification {
+
+    public static Specification<Product>
+            hasName(String name) {
+        return (root, query, cb) -> {
+            if (name == null || name.isBlank())
+                return null;
+            return cb.like(
+                cb.lower(root.get("name")),
+                "%" + name.toLowerCase() + "%");
+        };
+    }
+
+    public static Specification<Product>
+            hasCategory(Long categoryId) {
+        return (root, query, cb) -> {
+            if (categoryId == null) return null;
+            return cb.equal(
+                root.get("category").get("id"),
+                categoryId);
+        };
+    }
+
+    public static Specification<Product>
+            hasPriceRange(
+                BigDecimal min, BigDecimal max) {
+        return (root, query, cb) -> {
+            if (min == null && max == null)
+                return null;
+            if (min != null && max != null)
+                return cb.between(
+                    root.get("price"), min, max);
+            if (min != null)
+                return cb.greaterThanOrEqualTo(
+                    root.get("price"), min);
+            return cb.lessThanOrEqualTo(
+                root.get("price"), max);
+        };
+    }
+}
+\end{lstlisting}
+
+\section{Solution 3.3--3.4 --- Signals \& RxJS}
+
+\begin{lstlisting}[style=tsstyle, title={product-list.component.ts (with Signals \& RxJS)}]
+import { Component, OnInit, OnDestroy,
+  signal, computed } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormControl }
+  from '@angular/forms';
+import { Subject, takeUntil } from 'rxjs';
+import { debounceTime, distinctUntilChanged,
+  switchMap, tap } from 'rxjs/operators';
+import { ProductService }
+  from '../services/product.service';
+import { Product, PageResponse }
+  from '../models/product.model';
+
+@Component({
+  selector: 'app-product-list',
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule],
+  templateUrl: './product-list.component.html'
+})
+export class ProductListComponent
+    implements OnInit, OnDestroy {
+
+  searchControl = new FormControl('');
+
+  products = signal<Product[]>([]);
+  loading = signal(true);
+  currentPage = signal(0);
+  totalPages = signal(0);
+  pageSize = signal(10);
+
+  isEmpty = computed(() =>
+    this.products().length === 0
+    && !this.loading());
+
+  private destroy$ = new Subject<void>();
+
+  constructor(
+    private productService: ProductService) {}
+
+  ngOnInit(): void {
+    this.loadProducts('');
+
+    this.searchControl.valueChanges.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      tap(() => {
+        this.loading.set(true);
+        this.currentPage.set(0);
+      }),
+      switchMap(term =>
+        this.productService.search(
+          term || '', 0, this.pageSize())),
+      takeUntil(this.destroy$)
+    ).subscribe({
+      next: (res: PageResponse<Product>) => {
+        this.products.set(res.content);
+        this.totalPages.set(res.totalPages);
+        this.loading.set(false);
+      },
+      error: () => this.loading.set(false)
+    });
+  }
+
+  loadProducts(search: string): void {
+    this.loading.set(true);
+    this.productService.search(
+      search, this.currentPage(), this.pageSize()
+    ).pipe(takeUntil(this.destroy$))
+    .subscribe({
+      next: (res) => {
+        this.products.set(res.content);
+        this.totalPages.set(res.totalPages);
+        this.loading.set(false);
+      },
+      error: () => this.loading.set(false)
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+}
+\end{lstlisting}
+
+% ============================================================
+% CHAPTER 11: SOLUTIONS PHASE 4
+% ============================================================
+\chapter{Solution --- Phase 4}
+
+\section{Solution 4.1 --- User Entity}
+
+\begin{lstlisting}[style=javastyle, title={model/User.java (implements UserDetails)}]
+package com.smartinventory.model;
+
+import jakarta.persistence.*;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.security.core.*;
+import org.springframework.security.core.authority.*;
+import org.springframework.security.core.userdetails.*;
+import java.time.LocalDateTime;
+import java.util.*;
+
+@Entity @Table(name = "users")
+@Getter @Setter @NoArgsConstructor
+@AllArgsConstructor @Builder
+public class User implements UserDetails {
+    @Id @GeneratedValue(strategy =
+        GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
+
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
+
+    @Column(nullable = false, unique = true)
+    private String email;
+
+    @Column(nullable = false)
+    private String password;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role;
+
+    @CreationTimestamp
+    @Column(name = "created_at", updatable = false)
+    private LocalDateTime createdAt;
+
+    @Override
+    public Collection<? extends GrantedAuthority>
+            getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(
+            "ROLE_" + role.name()));
+    }
+
+    @Override
+    public String getUsername() { return email; }
+    @Override
+    public boolean isAccountNonExpired() {
+        return true; }
+    @Override
+    public boolean isAccountNonLocked() {
+        return true; }
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true; }
+    @Override
+    public boolean isEnabled() { return true; }
+}
+\end{lstlisting}
+
+\section{Solution 4.2--4.3 --- JWT \& Security Config}
+
+See the complete solutions in the Markdown version of this TP. The key patterns are:
+
+\begin{enumerate}
+    \item \texttt{JwtService}: Uses \texttt{io.jsonwebtoken} to generate/validate tokens
+    \item \texttt{JwtAuthenticationFilter}: Extends \texttt{OncePerRequestFilter}, extracts Bearer token, validates, sets \texttt{SecurityContextHolder}
+    \item \texttt{SecurityConfig}: Disables CSRF, sets STATELESS sessions, permits \texttt{/auth/**}, requires ADMIN for \texttt{/admin/**}
+\end{enumerate}
+
+\section{Solution 4.5--4.7 --- Angular Auth}
+
+\begin{lstlisting}[style=tsstyle, title={core/interceptors/auth.interceptor.ts}]
+import { HttpInterceptorFn }
+  from '@angular/common/http';
+import { inject } from '@angular/core';
+import { StorageService }
+  from '../services/storage.service';
+
+export const authInterceptor: HttpInterceptorFn =
+    (req, next) => {
+  if (req.url.includes('/auth/'))
+    return next(req);
+
+  const storage = inject(StorageService);
+  const token = storage.getToken();
+
+  if (token) {
+    const cloned = req.clone({
+      setHeaders: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    return next(cloned);
+  }
+
+  return next(req);
+};
+\end{lstlisting}
+
+\begin{lstlisting}[style=tsstyle, title={core/guards/auth.guard.ts}]
+import { CanActivateFn, Router }
+  from '@angular/router';
+import { inject } from '@angular/core';
+import { AuthService }
+  from '../services/auth.service';
+
+export const authGuard: CanActivateFn = () => {
+  const auth = inject(AuthService);
+  const router = inject(Router);
+
+  if (auth.isLoggedIn()) return true;
+  return router.createUrlTree(['/auth/login']);
+};
+\end{lstlisting}
+
+% ============================================================
+% CHAPTER 12: SOLUTIONS PHASE 5
+% ============================================================
+\chapter{Solution --- Phase 5}
+
+\section{Solution 5.1 --- N+1 Fix}
+
+\begin{lstlisting}[style=javastyle, title={ProductRepository with @EntityGraph}]
+@EntityGraph(attributePaths = {"category"})
+Page<Product> findAll(
+    Specification<Product> spec, Pageable pageable);
+
+@EntityGraph(attributePaths = {"category"})
+Page<Product> findAll(Pageable pageable);
+\end{lstlisting}
+
+\begin{infobox}
+\textbf{Before:} 1 query for products + N queries for categories = N+1 queries\\
+\textbf{After:} 1 query with LEFT JOIN = 1 query total
+\end{infobox}
+
+\section{Solution 5.3 --- Docker}
+
+\begin{lstlisting}[style=dockerstyle, title={docker-compose.yml}]
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: smart_inventory
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL",
+             "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build: ./smart-inventory-api
+    environment:
+      SPRING_DATASOURCE_URL:
+        jdbc:postgresql://db:5432/smart_inventory
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  ui:
+    build: ./smart-inventory-ui
+    ports:
+      - "80:80"
+    depends_on:
+      - api
+
+volumes:
+  postgres_data:
+\end{lstlisting}
+
+% ============================================================
+% WEEKLY SCHEDULE
+% ============================================================
+\chapter{Weekly Time Distribution}
+
+\section{Daily Schedule (2 hours/day)}
+
+\begin{longtable}{clp{9cm}}
+\toprule
+\textbf{Day} & \textbf{Focus} & \textbf{Activities} \\
+\midrule
+\endhead
+1 & \faIcon{book} + \faIcon{server} & 30min: Read docs/video. 90min: Implement API endpoint \\[0.3cm]
+2 & \faIcon{server} & 30min: Read docs. 90min: Complete backend, validation, errors \\[0.3cm]
+3 & \faIcon{book} + \faIcon{laptop} & 30min: Read Angular docs. 90min: Build service \& component \\[0.3cm]
+4 & \faIcon{laptop} & 30min: Read docs. 90min: Complete UI, connect to backend \\[0.3cm]
+5 & \faIcon{search} & Full 2h: Refactoring, debugging (Network Tab, SQL logs) \\[0.3cm]
+6 & \faIcon{flask} & Full 2h: Add a feature using only official docs \& error messages \\
+\bottomrule
+\end{longtable}
+
+% ============================================================
+% RESOURCES
+% ============================================================
+\chapter{Essential Resources}
+
+\begin{longtable}{p{4cm}l}
+\toprule
+\textbf{Resource} & \textbf{Link} \\
+\midrule
+\endhead
+Spring Boot Reference & \url{https://docs.spring.io/spring-boot/reference/} \\[0.3cm]
+Spring Data JPA & \url{https://docs.spring.io/spring-data/jpa/reference/} \\[0.3cm]
+Angular Documentation & \url{https://angular.dev} \\[0.3cm]
+RxJS Documentation & \url{https://rxjs.dev} \\[0.3cm]
+JWT Introduction & \url{https://jwt.io/introduction} \\[0.3cm]
+Docker Compose & \url{https://docs.docker.com/compose/} \\
+\bottomrule
+\end{longtable}
+
+\vfill
+
+\begin{center}
+\rule{0.5\textwidth}{0.5pt}\\[0.5cm]
+\textit{End of TP --- Smart Inventory \& Order Platform}\\[0.2cm]
+\textcopyright\ 2026 Harvard University --- School of Engineering and Applied Sciences
+\end{center}
+
+\end{document}
