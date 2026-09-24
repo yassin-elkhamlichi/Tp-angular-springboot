@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: Spring boot side
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/smart_inventory
+    username: postgres
+    password: yassine
+
+  jpa:
+    show-sql: true
